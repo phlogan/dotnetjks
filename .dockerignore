@@ -1,0 +1,13 @@
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+.dockerignore
+.env
+.git
+.gitignore
+.vs
+
+/bin/
+obj/
