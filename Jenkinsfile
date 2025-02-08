@@ -18,7 +18,7 @@ pipeline{
 			steps{
 				echo "Building..."
 				sh 'pwd && ls -l'
-				sh 'cd DotNekJks && dotnet build'
+				sh 'cd DotNetJks && dotnet build'
 			}
 		}
 	}
