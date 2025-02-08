@@ -8,7 +8,7 @@ pipeline{
 		pollSCM '*/5 * * * *'
 	}
 	stages{
-		stage ("Delivery and Deploy"){
+		stage ("Build"){
 			agent {
 				docker {
 					image 'mcr.microsoft.com/dotnet/sdk:8.0'
@@ -16,8 +16,22 @@ pipeline{
 				}
 			}
 			steps{
-				echo "Delivering..."
-				sh "mkdir -p /home/publish && cp -r DotNetJks /home/publish"
+				echo "Building..."
+				sh 'pwd && ls -l'
+				sh 'cd DotNetJks && dotnet build'
+			}
+		}
+		stage ("Test"){
+			agent {
+				docker {
+					image 'mcr.microsoft.com/dotnet/sdk:8.0'
+					args '--user root'
+				}
+			}
+			steps{
+				echo "Testing..."
+				sh 'pwd && ls -l'
+				sh 'cd DotNetJks && dotnet test'
 			}
 		}
 	}
