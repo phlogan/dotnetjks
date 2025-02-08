@@ -1,26 +1,23 @@
 pipeline{
 	agent{
 		node{
-			label 'docker-cloud-jks'
+			label 'docker-dotnet2'
 		}
-	}
-	environment {
-		DOTNET_IMAGE = 'mcr.microsoft.com/dotnet/sdk:8.0'
 	}
 	triggers{
 		pollSCM '*/5 * * * *'
 	}
 	stages{
-		stage ("Build Stage"){
+		stage ("Build"){
 			agent {
 				docker {
-					image 'jenkins/agent'
+					image 'mcr.microsoft.com/dotnet/sdk:8.0'
+					args '--user root'
 				}
 			}
 			steps{
 				echo "Building..."
-				sh "dotnet restore"
-				sh "dotnet build --configuration Release"
+				sh 'ls -l'
 			}
 		}
 	}
