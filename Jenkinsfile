@@ -21,5 +21,18 @@ pipeline{
 				sh 'cd DotNetJks && dotnet build'
 			}
 		}
+		stage ("Test"){
+			agent {
+				docker {
+					image 'mcr.microsoft.com/dotnet/sdk:8.0'
+					args '--user root'
+				}
+			}
+			steps{
+				echo "Testing..."
+				sh 'pwd && ls -l'
+				sh 'cd DotNetJks && dotnet test'
+			}
+		}
 	}
 }
